@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import uniqid from "uniqid";
 //import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 
 function EditarProductos() {
+  const navegar = useNavigate()
   const params = useParams();
   //hooks
   const [nombre, setNombre] = useState("");
@@ -21,21 +22,31 @@ function EditarProductos() {
         //setNombre = res.data.nombre
 
         console.log(res.data);
-        const dataProducto = res.data[0]
-        setNombre(dataProducto.nombre)
-        setDescripcion(dataProducto.descripcion)
-        setPrecio(dataProducto.precio)
+        const dataProducto = res.data[0];
+        setNombre(dataProducto.nombre);
+        setDescripcion(dataProducto.descripcion);
+        setPrecio(dataProducto.precio);
       });
   }, []);
 
-  function editarProducto(idProducto) {
+  function editarProducto() {
     let producto = {
-      idProducto: uniqid(),
+      idProducto: params.idProducto,
       nombre: nombre,
       descripcion: descripcion,
       precio: precio,
     };
     // console.log(idProducto);
+    axios
+      .post("/api/producto/actualizarProducto", producto)
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data);
+        navegar(0)
+      })
+      .then((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -98,10 +109,7 @@ function EditarProductos() {
         <div className="row">
           <div className="col-sm-6 offset-3">
             <div className="mb-3">
-              <button
-                onClick={editarProducto(params.idProducto)}
-                className="btn btn-success"
-              >
+            <button onClick={editarProducto} className="btn btn-success">
                 Actualizar Producto
               </button>
             </div>

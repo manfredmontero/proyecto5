@@ -1,9 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function ProductoIndividual({ producto }) {
+  const navegar = useNavigate();
+
+  function borrarProducto(idProducto) {
+    axios
+      .post("/api/producto/borrarProducto", { producto: idProducto })
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data);
+        navegar(0);
+      })
+      .then((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div className="container">
+    
+
       <div className="row">
         <div className="col-sm-6 offset-3">
           <ul className="list-group">
@@ -21,7 +39,15 @@ function ProductoIndividual({ producto }) {
             <li className="btn btn-success">Editar</li>
           </Link>
 
-          <button className="btn btn-danger"> Borrar</button>
+          <button
+            onClick={() => {
+              borrarProducto(producto.producto);
+            }}
+            className="btn btn-danger"
+          >
+            {" "}
+            Borrar
+          </button>
           <hr className="mt-4"></hr>
         </div>
       </div>

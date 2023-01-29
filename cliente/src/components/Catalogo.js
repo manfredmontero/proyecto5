@@ -1,37 +1,37 @@
-import React from "react";
-import PropTypes from "prop-types";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import CatalogoIndividual from "./CatalogoIndividual";
 
-function Catalogo({ imageSource, title, text, url }) {
+function Catalogo({ producto }) {
+  const [dataProductos, setProductos] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("api/producto/obtenerProductos")
+      .then((res) => {
+        console.log(res);
+        setProductos(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  //mapear lista de usuarios en objeto de productos
+  const listaProductos = dataProductos.map((producto) => {
+    return (
+      <div>
+        <CatalogoIndividual producto={producto} />
+      </div>
+    );
+  });
+
   return (
     <div>
-     <div className="card text-center bg-dark animate__animated animate__fadeInUp">
-      <div className="overflow">
-        <img src={imageSource} alt="a wallpaper" className="card-img-top" />
-      </div>
-      <div className="card-body text-light">
-        <h4 className="card-title">{title}</h4>
-        <p className="card-text text-secondary">
-          {text
-            ? text
-            : "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam deserunt fuga accusantium excepturi quia, voluptates obcaecati nam in voluptas perferendis velit harum dignissimos quasi ex? Tempore repellat quo doloribus magnam."}
-        </p>
-        <a
-          href={url ? url : "#!"}
-          target="_blank"
-          className="btn btn-outline-secondary border-0"
-          rel="noreferrer"
-        >
-          Go to {title}
-        </a>
-      </div>
-    </div>
+      <h2>Lista de productos</h2>
+      {listaProductos}
     </div>
   );
 }
-Catalogo.propTypes = {
-    title: PropTypes.string,
-    text: PropTypes.string,
-    url: PropTypes.string,
-    imageSource: PropTypes.string
-  };
+
 export default Catalogo;

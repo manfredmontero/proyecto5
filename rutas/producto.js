@@ -24,7 +24,7 @@ router.post("/agregarProducto", (req, res) => {
     nombre: nombre,
     descripcion: descripcion,
     precio: precio,
-    producto: idProducto
+    producto: idProducto,
   });
 
   nuevoProducto.save(function (err) {
@@ -47,9 +47,9 @@ router.get("/obtenerProductos", (req, res) => {
     }
   });
 });
-/*
+
 router.post("/obtenerDataProducto", (req, res) => {
-  ModeloProducto.find({idProducto:req.body.idProducto}, function (docs, err) {
+  ModeloProducto.find({ producto: req.body.idProducto }, function (docs, err) {
     if (!err) {
       res.send(docs);
     } else {
@@ -57,4 +57,49 @@ router.post("/obtenerDataProducto", (req, res) => {
     }
   });
 });
-*/
+
+router.post("/actualizarProducto", (req, res) => {
+  ModeloProducto.findOneAndUpdate(
+    { producto: req.body.idProducto },
+    {
+      nombre: req.body.nombre,
+      descripcion: req.body.descripcion,
+      precio: req.body.precio,
+    },
+    (err) => {
+      if (!err) {
+        res.send("Producto Actualizado");
+      } else {
+        res.send(err);
+      }
+    }
+  );
+  /*
+  const { nombre, descripcion, precio, idProducto } = req.body;
+  const nuevoProducto = new ModeloProducto({
+    nombre: nombre,
+    descripcion: descripcion,
+    precio: precio,
+    producto: idProducto,
+  });
+
+  nuevoProducto.save(function (err) {
+    if (!err) {
+      res.send("Producto Actualizado Correctamente");
+    } else {
+      res.send(err);
+    }
+  });
+
+  */
+});
+
+router.post("/borrarProducto", (req, res) => {
+  ModeloProducto.findOneAndDelete({ producto: req.body.producto }, (err) => {
+    if (!err) {
+      res.send("Producto Borrado");
+    } else {
+      res.send(err);
+    }
+  });
+});
