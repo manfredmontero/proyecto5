@@ -18,7 +18,7 @@ function Catalogo({ producto }) {
   }, []);
 
   //mapear lista de usuarios en objeto de productos
-  const listaProductos = dataProductos.map((producto) => {
+  const catalogoProductos = dataProductos.map((producto) => {
     return (
       <div>
         <CatalogoIndividual producto={producto} />
@@ -27,9 +27,11 @@ function Catalogo({ producto }) {
   });
 
   return (
-    <div>
+    <div className=" container d-flex flex-wrap align-items-center">
       <h2 className="">Catalogo de productos disponibles</h2>
-      {listaProductos}
+      <div className=" container d-flex flex-wrap align-items-center ">
+        {catalogoProductos}
+      </div>
     </div>
   );
 }

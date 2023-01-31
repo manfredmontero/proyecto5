@@ -12,6 +12,7 @@ const eschemaProducto = new eschema({
   nombre: String,
   descripcion: String,
   precio: String,
+  images: String,
 });
 
 const ModeloProducto = mongoose.model("productos", eschemaProducto);
@@ -19,12 +20,13 @@ module.exports = router;
 
 //agregar un producto a la BD
 router.post("/agregarProducto", (req, res) => {
-  const { nombre, descripcion, precio, idProducto } = req.body;
+  const { nombre, descripcion, precio, idProducto, images } = req.body;
   const nuevoProducto = new ModeloProducto({
     nombre: nombre,
     descripcion: descripcion,
     precio: precio,
     producto: idProducto,
+    images: images,
   });
 
   nuevoProducto.save(function (err) {
@@ -65,6 +67,7 @@ router.post("/actualizarProducto", (req, res) => {
       nombre: req.body.nombre,
       descripcion: req.body.descripcion,
       precio: req.body.precio,
+      images: req.body.images,
     },
     (err) => {
       if (!err) {

@@ -7,6 +7,7 @@ function AgregarProductos() {
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
+  const [images, setImages] = useState("");
 
   //esta funcion sirve para agregar un producto a la base de datos
   function agregarProducto() {
@@ -15,6 +16,7 @@ function AgregarProductos() {
       nombre: nombre,
       descripcion: descripcion,
       precio: precio,
+      images:images
     };
     console.log(producto);
     axios
@@ -77,6 +79,23 @@ function AgregarProductos() {
               defaultValue={precio}
               onChange={(e) => {
                 setPrecio(e.target.value);
+              }}
+            ></input>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-6 offset-3">
+          <div className="mb-3">
+            <label htmlFor="precio" className="form-label">
+              URL de la imagen
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={images}
+              onChange={(e) => {
+                setImages(e.target.value);
               }}
             ></input>
           </div>

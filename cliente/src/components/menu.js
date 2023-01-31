@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Catalogo from "./Catalogo"
+import Catalogo from "./Catalogo";
 import AgregarProductos from "./AgregarProducto";
 import EditarProductos from "./EditarProductos";
-import Carrito from './Carrito'
-import Productos from './Productos'
+import Carrito from "./Carrito";
+import Productos from "./Productos";
 
 function menu() {
   return (
@@ -28,22 +28,33 @@ function menu() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="catalogo">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="catalogo"
+                >
                   Catalogo
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="productos">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="productos"
+                >
                   Productos
                 </a>
               </li>
+
               <li className="nav-item">
+                <a className="nav-link" href="agregarProducto">
+                  AgregarProducto
+                </a>
+              </li>
+              <li className="nav-item item-right">
                 <a className="nav-link" href="carrito">
                   Carrito
                 </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="agregarProducto">AgregarProducto</a>
               </li>
             </ul>
           </div>
@@ -55,16 +66,20 @@ function menu() {
           <Route path="/agregarProducto" element={<AgregarProductos />} exact>
             {" "}
           </Route>
-          <Route path="/editarProducto/:idProducto" element={<EditarProductos />} exact>
-            {" "}
-          </Route>
-          <Route path="/carrito" element={<Carrito />} exact>
+          <Route
+            path="/editarProducto/:idProducto"
+            element={<EditarProductos />}
+            exact
+          >
             {" "}
           </Route>
           <Route path="/catalogo" element={<Catalogo />} exact>
             {" "}
           </Route>
           <Route path="/productos" element={<Productos />} exact>
+            {" "}
+          </Route>
+          <Route path="/carrito" element={<Carrito />} exact>
             {" "}
           </Route>
         </Routes>

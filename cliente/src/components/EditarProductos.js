@@ -5,12 +5,13 @@ import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 
 function EditarProductos() {
-  const navegar = useNavigate()
+  const navegar = useNavigate();
   const params = useParams();
   //hooks
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
+  const [images, setImages] = useState("");
 
   useEffect(() => {
     console.log(params.idProducto);
@@ -26,6 +27,7 @@ function EditarProductos() {
         setNombre(dataProducto.nombre);
         setDescripcion(dataProducto.descripcion);
         setPrecio(dataProducto.precio);
+        setImages(dataProducto.images)
       });
   }, []);
 
@@ -35,6 +37,7 @@ function EditarProductos() {
       nombre: nombre,
       descripcion: descripcion,
       precio: precio,
+      images:images
     };
     // console.log(idProducto);
     axios
@@ -42,7 +45,7 @@ function EditarProductos() {
       .then((res) => {
         console.log(res.data);
         alert(res.data);
-        navegar(0)
+        navegar(0);
       })
       .then((err) => {
         console.log(err);
@@ -109,7 +112,24 @@ function EditarProductos() {
         <div className="row">
           <div className="col-sm-6 offset-3">
             <div className="mb-3">
-            <button onClick={editarProducto} className="btn btn-success">
+              <label htmlFor="precio" className="form-label">
+                URL de la imagen
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={images}
+                onChange={(e) => {
+                  setImages(e.target.value);
+                }}
+              ></input>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-6 offset-3">
+            <div className="mb-3">
+              <button onClick={editarProducto} className="btn btn-success">
                 Actualizar Producto
               </button>
             </div>

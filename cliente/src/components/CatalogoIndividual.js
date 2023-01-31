@@ -6,12 +6,15 @@ function CatalogoIndividual({ producto }) {
   //const navegar = useNavigate();
 
   return (
-    <div className="container">
-      <div className="card cardModified ">
+    <div className="m-2">
+      <div className="card cardModified p-2">
         <div className="card-body ">
           <h4 className="card-header">{producto.nombre}</h4>
           <p className="card-text">{producto.descripcion}</p>
           <p className="card-text">Precio: ${producto.precio}</p>
+          <img className="imagen-productos" src={producto.images} />
+          <br />
+          <br />
           <a href="#" className="btn btn-info">
             Agregar al Carrito
           </a>

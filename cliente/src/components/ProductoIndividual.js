@@ -28,6 +28,7 @@ function ProductoIndividual({ producto }) {
             </strong>
             <li className="list-group-item">{producto.descripcion}</li>
             <li className="list-group-item">Precio: {producto.precio}</li>
+            <li className="list-group-item"><img className="imagen-productos" src={producto.images}/></li>
           </ul>
           <br />
           <Link to={`/editarProducto/${producto.producto}`}>

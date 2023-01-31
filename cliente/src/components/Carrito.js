@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
 
-function carrito() {
+
+function Carrito() {
   return (
-    <div>
-      Carrito
+    <div className="container">
+      <div>
+        <img scr="../../public/images/car.png"/>
+        Articulos: <span className="cart-count">0</span>
+      </div>
     </div>
-  )
+  );
 }
 
-export default carrito
+export default Carrito;
