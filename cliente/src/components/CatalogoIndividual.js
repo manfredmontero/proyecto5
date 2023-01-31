@@ -7,16 +7,17 @@ function CatalogoIndividual({ producto }) {
 
   return (
     <div className="container">
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">{producto.nombre}</h5>
+      <div className="card cardModified ">
+        <div className="card-body ">
+          <h4 className="card-header">{producto.nombre}</h4>
           <p className="card-text">{producto.descripcion}</p>
-          <p className="card-text">{producto.precio}</p>
-          <a href="#" className="btn btn-primary">
+          <p className="card-text">Precio: ${producto.precio}</p>
+          <a href="#" className="btn btn-info">
             Agregar al Carrito
           </a>
         </div>
       </div>
+      <br />
     </div>
   );
 }

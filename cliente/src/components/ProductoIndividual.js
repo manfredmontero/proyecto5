@@ -20,21 +20,16 @@ function ProductoIndividual({ producto }) {
 
   return (
     <div className="container">
-    
-
       <div className="row">
         <div className="col-sm-6 offset-3">
           <ul className="list-group">
-            <li key={producto._id} className="list-group-item">
-              {producto.nombre}
-            </li>
-            <li key={producto._id} className="list-group-item">
-              {producto.descripcion}
-            </li>
-            <li key={producto._id} className="list-group-item">
-              {producto.precio}
-            </li>
+            <strong>
+              <li className="list-group-item">{producto.nombre}</li>
+            </strong>
+            <li className="list-group-item">{producto.descripcion}</li>
+            <li className="list-group-item">Precio: {producto.precio}</li>
           </ul>
+          <br />
           <Link to={`/editarProducto/${producto.producto}`}>
             <li className="btn btn-success">Editar</li>
           </Link>
@@ -43,7 +38,7 @@ function ProductoIndividual({ producto }) {
             onClick={() => {
               borrarProducto(producto.producto);
             }}
-            className="btn btn-danger"
+            className="btn btn-danger ms-2"
           >
             {" "}
             Borrar

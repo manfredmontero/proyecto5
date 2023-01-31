@@ -28,7 +28,7 @@ function Catalogo({ producto }) {
 
   return (
     <div>
-      <h2>Lista de productos</h2>
+      <h2 className="">Catalogo de productos disponibles</h2>
       {listaProductos}
     </div>
   );
