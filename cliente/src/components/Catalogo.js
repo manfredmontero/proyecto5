@@ -17,6 +17,8 @@ function Catalogo({ producto }) {
       });
   }, []);
 
+//Funcion para agregar productos al carrito
+  
   //mapear lista de usuarios en objeto de productos
   const catalogoProductos = dataProductos.map((producto) => {
     return (

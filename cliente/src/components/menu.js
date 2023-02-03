@@ -5,14 +5,17 @@ import AgregarProductos from "./AgregarProducto";
 import EditarProductos from "./EditarProductos";
 import Carrito from "./Carrito";
 import Productos from "./Productos";
+import AgregarUsuario from "./AgregarUsuario";
+import Login from "./Login";
+import Carusel from "./carusel";
 
 function menu() {
   return (
-    <div>
+    <div className="">
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-            RutinasMontero
+            Productos Montero
           </a>
           <button
             className="navbar-toggler"
@@ -47,14 +50,60 @@ function menu() {
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="agregarProducto">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="agregarProducto"
+                >
                   AgregarProducto
                 </a>
               </li>
               <li className="nav-item item-right">
-                <a className="nav-link" href="carrito">
-                  Carrito
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="carrito"
+                >
+                 <img className="imgLogo" src="https://cdn-icons-png.flaticon.com/512/107/107831.png"></img>
                 </a>
+              </li>
+
+              <li className="nav-item">
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  Log In
+                </button>
+
+                <div
+                  className="modal fade"
+                  id="exampleModal"
+                  tabIndex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">
+                          Loguearse
+                        </h5>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <Login />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
@@ -62,8 +111,11 @@ function menu() {
       </nav>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<menu />} exact></Route>
+          <Route path="/" element={<Carusel />} exact></Route>
           <Route path="/agregarProducto" element={<AgregarProductos />} exact>
+            {" "}
+          </Route>
+          <Route path="/agregarUsuario" element={<AgregarUsuario />} exact>
             {" "}
           </Route>
           <Route
@@ -80,6 +132,9 @@ function menu() {
             {" "}
           </Route>
           <Route path="/carrito" element={<Carrito />} exact>
+            {" "}
+          </Route>
+          <Route path="/login" element={<Login />} exact>
             {" "}
           </Route>
         </Routes>
