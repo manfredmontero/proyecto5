@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import uniqid from "uniqid";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function AgregarProductos() {
   //hooks
@@ -22,7 +23,7 @@ function AgregarProductos() {
     axios
       .post("/api/producto/agregarProducto", producto)
       .then((res) => {
-        alert(res.data);
+        toast.success(res.data)
       })
       .then((err) => {
         console.log(err);
@@ -110,6 +111,7 @@ function AgregarProductos() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import uniqid from "uniqid";
 //import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function EditarProductos() {
   const navegar = useNavigate();
@@ -20,14 +21,12 @@ function EditarProductos() {
         idProducto: params.idProducto,
       })
       .then((res) => {
-        //setNombre = res.data.nombre
-
         console.log(res.data);
         const dataProducto = res.data[0];
         setNombre(dataProducto.nombre);
         setDescripcion(dataProducto.descripcion);
         setPrecio(dataProducto.precio);
-        setImages(dataProducto.images)
+        setImages(dataProducto.images);
       });
   }, []);
 
@@ -37,15 +36,15 @@ function EditarProductos() {
       nombre: nombre,
       descripcion: descripcion,
       precio: precio,
-      images:images
+      images: images,
     };
     // console.log(idProducto);
     axios
       .post("/api/producto/actualizarProducto", producto)
       .then((res) => {
-        console.log(res.data);
-        alert(res.data);
-        navegar(0);
+        console.log(res.data);        
+        //navegar(0);
+        toast.success(res.data);
       })
       .then((err) => {
         console.log(err);
@@ -136,6 +135,7 @@ function EditarProductos() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

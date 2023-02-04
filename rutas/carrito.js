@@ -35,11 +35,27 @@ router.post("/agregarproductocarrito", (req, res) => {
 });
 
 router.post("/obtenercarrito", (req, res) => {
-  ModeloCarrito.find({ nombreusuario: req.body.nombreusuario }, function (docs, err) {
-    if (!err) {
-      res.send(docs);
-    } else {
-      res.send(err);
+  ModeloCarrito.find(
+    { nombreusuario: req.body.nombreusuario },
+    function (docs, err) {
+      if (!err) {
+        res.send(docs);
+      } else {
+        res.send(err);
+      }
     }
-  });
+  );
+});
+
+router.post("/vaciarcarrito", (req, res) => {
+  ModeloCarrito.deleteMany(
+    { nombreusuario: req.body.nombreusuario },
+    (err) => {
+      if (!err) {
+        res.send("Carrito Vacio");
+      } else {
+        res.send(err);
+      }
+    }
+  );
 });

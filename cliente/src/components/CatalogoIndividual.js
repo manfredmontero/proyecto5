@@ -2,9 +2,7 @@ import React from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
-
 function CatalogoIndividual({ producto }) {
-
   function agregarProductoCarrito() {
     let carrito = {
       producto: producto.producto,
@@ -35,7 +33,6 @@ function CatalogoIndividual({ producto }) {
     <div className="m-2">
       <div className="card cardModified p-2">
         <div className="card-body card-center">
-          <p className="hidden"> {producto.producto} </p>
           <h4 className="card-header">{producto.nombre}</h4>
           <br />
           <p className="card-text">{producto.descripcion}</p>

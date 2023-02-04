@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function ProductoIndividual({ producto }) {
   const navegar = useNavigate();
@@ -9,9 +10,8 @@ function ProductoIndividual({ producto }) {
     axios
       .post("/api/producto/borrarProducto", { producto: idProducto })
       .then((res) => {
-        console.log(res.data);
-        alert(res.data);
         navegar(0);
+        toast.success(res.data);
       })
       .then((err) => {
         console.log(err);
@@ -28,7 +28,9 @@ function ProductoIndividual({ producto }) {
             </strong>
             <li className="list-group-item">{producto.descripcion}</li>
             <li className="list-group-item">Precio: {producto.precio}</li>
-            <li className="list-group-item"><img className="imagen-productos" src={producto.images}/></li>
+            <li className="list-group-item">
+              <img className="imagen-productos" src={producto.images} />
+            </li>
           </ul>
           <br />
           <Link to={`/editarProducto/${producto.producto}`}>
@@ -47,6 +49,7 @@ function ProductoIndividual({ producto }) {
           <hr className="mt-4"></hr>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
