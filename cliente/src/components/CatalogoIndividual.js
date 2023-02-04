@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 function CatalogoIndividual({ producto }) {
-  //const navegar = useNavigate();
 
   function agregarProductoCarrito() {
     let carrito = {

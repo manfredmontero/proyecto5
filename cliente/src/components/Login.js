@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import AgregarUsuario from "./AgregarUsuario";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
   const [usuario, setUsuario] = useState("");
@@ -26,14 +27,17 @@ function Login() {
           const dataProducto = res.data[0];
           if (dataProducto.contra === params.contrasena) {
             sessionStorage.setItem("user", dataProducto.nombreusuario);
-            /*      window.location.reload(false);  */
+            window.location.reload(false);
+            toast.success("Usuario ${}", { position: "top-center" });
           } else {
             console.log("incorrecta");
-            setMensaje = "prueba";
+
+            toast.error("Contrasena Incorrecta", { position: "top-center" });
           }
         } else {
-          setMensaje("testing");
-          console.log("usuario No encontrado");
+          
+          toast.error("Usuario No encontrado", { position: "top-center" });
+          
         }
       });
   }
@@ -67,7 +71,7 @@ function Login() {
             }}
           />
         </Form.Group>
-        <Form.Label defaultValue={mensaje} > </Form.Label>
+        <Form.Label defaultValue={mensaje}> </Form.Label>
         <Button variant="primary" onClick={loguear}>
           Ingresar
         </Button>
@@ -78,6 +82,7 @@ function Login() {
         >
           Registrarme
         </a>
+        <ToastContainer />
       </Form>
       <BrowserRouter>
         <Routes>

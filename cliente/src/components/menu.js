@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Catalogo from "./Catalogo";
 import AgregarProductos from "./AgregarProducto";
@@ -8,8 +8,34 @@ import Productos from "./Productos";
 import AgregarUsuario from "./AgregarUsuario";
 import Login from "./Login";
 import Carusel from "./carusel";
+import axios from "axios";
 
-function menu() {
+function Menu() {
+  const [dataProductos, setProductos] = useState([]);
+  const usuario = { nombreusuario: sessionStorage.getItem("user") };
+  let precioTotal = 0;
+  useEffect(() => {
+    console.log(usuario);
+    axios
+      .post("api/carrito/obtenercarrito", {
+        nombreusuario: sessionStorage.getItem("user"),
+      })
+      .then((res) => {
+        setProductos(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const productosCarrito = dataProductos.map((carrito) => {
+    return (precioTotal = precioTotal + parseInt(carrito.precio));
+  });
+  console.log(productosCarrito[dataProductos.length - 1]);
+  const carritoFinal = {
+    precioTotal: productosCarrito[dataProductos.length - 1],
+    cantidad: dataProductos.length,
+  };
   return (
     <div className="">
       <nav className="navbar navbar-expand-lg bg-light">
@@ -63,9 +89,43 @@ function menu() {
                   className="nav-link active"
                   aria-current="page"
                   href="carrito"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal1"
                 >
-                 <img className="imgLogo" src="https://cdn-icons-png.flaticon.com/512/107/107831.png"></img>
+                  <img
+                    className="imgLogo"
+                    src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
+                  ></img>
                 </a>
+                <div
+                  className="modal fade"
+                  id="exampleModal1"
+                  tabIndex="-1"
+                  aria-labelledby="exampleModalLabelCarrito"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5
+                          className="modal-title"
+                          id="exampleModalLabelCarrito"
+                        >
+                          Carrito
+                        </h5>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <Carrito carrito={carritoFinal}/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </li>
 
               <li className="nav-item">
@@ -143,4 +203,4 @@ function menu() {
   );
 }
 
-export default menu;
+export default Menu;
